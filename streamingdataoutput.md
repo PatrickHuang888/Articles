@@ -65,4 +65,5 @@ flowStream.saveAsObjectFiles(SavePathToday)
 如果你不希望每天一个目录而是每个月一个目录可以修改`parquet`的写入方式为`Append`
 合并后如下所示：
 ![merged files](mergedFiles.png)
-此例中合并后查询效率提高百倍以上
+
+在此案例中合并小文件并采用列式存储后查询效率为原始数据的100X
