@@ -2,7 +2,7 @@
 
 1 运行架构  
 ADP平台运行时的架构
-![运行架构](runningArchitecture.png)
+![运行架构](runningArchitecture.png)  
 图一    
 驱动程序驱动多个执行器运行，并在执行器上启动接收器接收流数据。
 执行器可以在多个节点上运行，此处为表示概念只画了两个。
