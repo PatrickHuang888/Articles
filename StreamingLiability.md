@@ -1,6 +1,6 @@
 #ADP2.0实时流数据处理的数据可靠性简介
 
-1. 运行架构  
+**1 运行架构**  
 ADP平台运行时的架构
 ![运行架构](runningArchitecture.png)  
 图一    
@@ -9,7 +9,7 @@ ADP平台运行时的架构
 从上图我们知道，当数据注入时是在接收器向所在的执行器注入流数据，
 如果执行器崩溃，那么已注入的数据就丢失了
 
-2. 数据复制  
+**2 数据复制**  
 向平台注入流数据，我们需要编写自己的`Receiver`,Receiver的定义如下
 ```scala
 abstract class Receiver[T](val storageLevel: StorageLevel) extends Serializable 
@@ -20,13 +20,13 @@ abstract class Receiver[T](val storageLevel: StorageLevel) extends Serializable
 图二  
 
 
-3. 重新选择执行器  
+**3 重新选择执行器**  
 如果执行器和接收器失效，那么驱动程序会使用另一个执行器上的已经复制的数据进行处理，
 并自动启动一个新的接收器接收数据
 ![执行器失败](executorFail.png)
 图三  
 
-4. WAL  
+**4 WAL**  
 如果复制失败，然后执行器又发生崩溃，那么这部分已经进入系统内存的数据就发生丢失  
 ![复制失败](replicateFail.png)
 图四  
@@ -45,7 +45,7 @@ abstract class Receiver[T](val storageLevel: StorageLevel) extends Serializable
 
 
 
-5. 检查点  
+**5 检查点**  
 由于执行器由驱动程序指挥，如果驱动程序崩溃，与此相关的执行器都会退出
 那么这里就还有一个问题，注入系统或写入日志的数据元信息是保存在驱动程序中的，
 如果这时驱动程序崩溃，系统就不知道哪些数据处理过了，哪些没有处理过。
