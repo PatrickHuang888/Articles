@@ -4,7 +4,7 @@
 我对数据库建立一个连接，然后写入数据就行了，但是因为ADP是一个分布式系统，事情并不像看
 上去那么简单。
 
-1. 我们来看代码示例，比如我们要访问mongodb(此处用的是mongodb的Java驱动)
+1.我们来看代码示例，比如我们要访问mongodb(此处用的是mongodb的Java驱动)
 ```scala
     val mongoClient = new MongoClient()
     val db = mongoClient.getDatabase("test")
@@ -34,7 +34,7 @@ Serialization stack:
 那么`coll`需要从驱动端传到工作端，报错是`coll`的序列化出错，即使传输不出错，
 在工作端上与`coll`相对应的数据库连接也是不存在的。
 
-2. 怎么解决这个问题，当然是在工作端建立连接而不是在驱动端建立连接传过去
+2.怎么解决这个问题，当然是在工作端建立连接而不是在驱动端建立连接传过去
 代码这样：
 ```scala
 myDataRdd.foreach {
@@ -51,7 +51,9 @@ myDataRdd.foreach {
 这样程序运行就不会报错了。可是，这样其实是在每插入一条记录的时候都建立一个链接，效率太低。
 能否一个工作端建立一个连接而不是一个数据建立一个连接？
 
-3. 使用方法`foreachPartition`,可以做到
+3.使用方法`foreachPartition`,可以做到
+我们知道ADP内的数据是分块的，这些块分布在多个工作节点上，`foreachPartition`方法就是针对
+每个工作节点进行操作，代码如下
 ```scala
 myDataRdd.foreachPartition {
     partitionData =>
