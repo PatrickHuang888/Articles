@@ -1,4 +1,4 @@
-#ADP上混合Scala,Java和Spring开发spark应用的方法
+# ADP上混合Scala,Java和Spring开发spark应用的方法
 
 spark的弹性分布式数据集RDD(Resilient Distributed Dataset)提供了丰富的数据处理函数，
 例如map,reduce,filter等，Scala利用函数式编程的写法使用这些函数是非常方便的，代码简洁高效，用Java则繁琐很多。
@@ -10,7 +10,7 @@ spark的弹性分布式数据集RDD(Resilient Distributed Dataset)提供了丰�
 
 那么我们怎么能够做到把Scala,Java,Spring集成在一个项目里开发呢？
 步骤如下：
-###1 项目管理配置
+### 1 项目管理配置
 我们使用Maven管理项目，配置如下：
 ```xml
     <!--引入Spring Boot -->
@@ -78,7 +78,7 @@ spark的弹性分布式数据集RDD(Resilient Distributed Dataset)提供了丰�
     </build>
 ```
 
-###2Java操作数据库
+### 2Java操作数据库
 首先
 在目录src/main/java目录下按你的对象模型写数据对象代码,如
 src/main/java/com/apusic/model/Person.java
@@ -89,7 +89,7 @@ public interface PersonRepository extends MongoRepository<Person, String>{
 ```
 在resource目录下配置application.properties等，这些和一般Java项目并无不同，不做详细描述
 
-###3Scala编写spark任务并操作数据库存取
+### 3Scala编写spark任务并操作数据库存取
 在目录src/main/scala目录下创建Scala代码
 ```scala
 package com.apusic.demo
@@ -114,7 +114,7 @@ class TestApplication @Autowired()(personRepository: PersonRepository) extends C
 ```
 这里的技巧就是怎样使用Spring的注释(Annotation)`Autowried`将repository注入进来
 
-###4 组装环境
+### 4 组装环境
 ```scala
 object TestApplication extend App {
     SpringApplication.run(classOf[TestMongoAccess], args: _*)
@@ -122,7 +122,7 @@ object TestApplication extend App {
 ```
 这里关键的把Scala程序和Spring环境挂接在了一起
 
-###5 运行
+### 5 运行
 编译打包
 `mvn package`
 得益于Spring boot提供的整套运行环境，我们只需要一个很简单的命令就可以运行这样一个复杂的程序了
