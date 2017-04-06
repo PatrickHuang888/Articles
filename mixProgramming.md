@@ -95,7 +95,7 @@ public interface PersonRepository extends MongoRepository<Person, String>{
 package com.apusic.demo
 
 @SpringBootApplication
-class TestApplication @Autowired()(personRepository: PersonRepository) extends CommandLineRunner {
+class TestApplication @Autowired()(repository: PersonRepository) extends CommandLineRunner {
 
   override def run(args: String*): Unit = {
     val sparkContext = new SparkContext()
@@ -108,7 +108,7 @@ class TestApplication @Autowired()(personRepository: PersonRepository) extends C
     //做一系列你需要的操作
     ...
     //最后存取数据
-    jobsRepository.save(person)
+    repository.save(person)
   }
 }
 ```
