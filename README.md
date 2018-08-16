@@ -7,3 +7,4 @@
 * [ADP上存取数据库技巧](dbconnection.md)
 * [ADP上混合Scala,Java和Spring开发spark应用的方法](mixProgramming.md)
 * [Lucene怎样搜索数字范围](TrieNumber.md)
+* [A Shift Reduce Conflict Resolving in SQL Parser Generating](shiftReduceConflict.md)
