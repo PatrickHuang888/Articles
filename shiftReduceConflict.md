@@ -42,3 +42,8 @@ state 175
   }
 ```
 从`CollateExpr`得到simple_expression，然后执行reduce规则146;如果没有就直接执行reduce规则146直接得到`bit_expression`，总之都是reduce到bit_expression,这是我们想要的结果，从上面的分析可以看出缺省的语法冲突解决方法没有问题，暂时不需要理会这个警告
+
+## Reference
+[Yacc Theory](https://www.epaperpress.com/lexandyacc/thy.html)  
+[Yacc](http://dinosaur.compilertools.net/yacc/)
+[Yacc Parser Conflict Handling](https://www2.cs.arizona.edu/classes/cs453/fall14/DOCS/conflicts.pdf)
